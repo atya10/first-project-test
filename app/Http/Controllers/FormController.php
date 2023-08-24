@@ -65,7 +65,7 @@ class FormController extends Controller
         // dd($request->all());
         // mkdir()
         // $img_name = rand().time(). $request->file('image')->getClientOriginalName();
-        //$time_now = date(' Y - m - d H : i : s ' ) ;
+         $time_now = date(' Y - m - d H : i : s ' ) ;
 
 
 
@@ -75,7 +75,7 @@ class FormController extends Controller
 
             $ex = $img -> getClientOriginalExtension () ;
 
-            $img_name = rand () . rand () . '_' . rand() . rand() . rand() . '_' . rand() . '_' . time() . '.' . $ex ;
+            $img_name = rand () . rand () . time() . '.' . $ex ;
 
             $img -> move ( public_path ('images/' . $folder_name ), $img_name );
 
