@@ -65,7 +65,7 @@ class FormController extends Controller
         // dd($request->all());
         // mkdir()
         // $img_name = rand().time(). $request->file('image')->getClientOriginalName();
-         $time_now = date(' Y - m - d H : i : s ' ) ;
+          $time_now = date(' Y - m - d H : i : s ' ) ;
 
 
 
