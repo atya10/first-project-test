@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactUsMail;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 
 class FormController extends Controller
 {
@@ -81,4 +83,35 @@ class FormController extends Controller
 
         }
     }
+
+
+    function contact() {
+        return view('forms.contact');
+    }
+
+    function contact_data(Request $request) {
+        // dd($request->all());
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'phone' => 'required',
+            'subject' => 'required',
+            'image' => 'nullable|image|mimes:png,jpg',
+            'message' => 'required',
+        ]);
+
+        $data = $request->except('_token', 'image');
+
+        if ($request->hasFile('image')){
+            $imgname = rand().time().$request->file('image')->getClientOriginalName();
+            $request->file('image')->move(public_path('images'), $imgname);
+            $data['image'] = $imgname;
+        }
+
+        // dd($data);
+
+        Mail::to('mustafa.diouck2004@gmail.com')->send(new ContactUsMail($data));
+    }
+
+
 }
